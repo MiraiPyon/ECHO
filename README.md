@@ -17,6 +17,12 @@ ECHO can play audio files directly from the terminal.
 - Useful for quickly checking a file.
 - Great when you want to preview or replay audio without opening a separate media player.
 
+**Usage:**
+
+```bash
+echo play "input.mp3"
+```
+
 ### 2. Trim Audio (`trim`)
 
 The `trim` command lets users cut out a specific section from an audio file, such as extracting the chorus from 00:30 to 01:30.
