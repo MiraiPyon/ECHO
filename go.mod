@@ -5,12 +5,13 @@ go 1.25.0
 require (
 	github.com/faiface/beep v1.1.0
 	github.com/gdamore/tcell/v2 v2.8.1
-	github.com/rivo/tview v0.42.0
+	github.com/rivo/tview v0.42.1-0.20260316130009-63ee97f9e014
 	golang.org/x/term v0.28.0
 )
 
 require (
 	github.com/gdamore/encoding v1.0.1 // indirect
+	github.com/gdamore/tcell v1.3.1-0.20200825151011-0c473b86d82f // indirect
 	github.com/hajimehoshi/go-mp3 v0.3.4 // indirect
 	github.com/hajimehoshi/oto v1.0.2 // indirect
 	github.com/lucasb-eyer/go-colorful v1.2.0 // indirect
