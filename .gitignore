@@ -1,0 +1,23 @@
+# Build artifacts
+bin/
+dist/
+*.test
+*.out
+.coverprofile
+
+# OS and editor files
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Local scratch space
+tmp/
+temp/
+output/
+sounds/
+tests/
+docs/
+*.log

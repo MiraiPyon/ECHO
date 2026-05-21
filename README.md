@@ -1,88 +1,63 @@
 # ECHO
 
-**ECHO** (Efficient, Command-line, Harmony, Orchestrator) is a **Go**-based CLI tool that runs in the terminal and helps users work with audio quickly and conveniently.
+ECHO is a terminal-based audio tool written in Go. It includes an interactive launcher and a custom player UI for previewing audio files without leaving the terminal.
 
-## Goals
+## What Works Now
 
-- Handle common audio tasks directly from the terminal.
-- Avoid opening heavy editors for simple operations.
-- Keep the command syntax short, memorable, and practical for both casual and technical users.
+- `play` opens a terminal player for a single audio file.
+- The player supports play/pause, seek, mute, volume changes, speed selection, and returning to the main launcher.
+- The launcher can be used with the keyboard or mouse.
 
-## Core Features
+## Command Status
 
-### 1. Play Audio
+- `play` - implemented
+- `trim` - planned
+- `concat` - planned
+- `extract` - planned
+- `volume` - planned
 
-ECHO can play audio files directly from the terminal.
+## Requirements
 
-- Useful for quickly checking a file.
-- Great when you want to preview or replay audio without opening a separate media player.
+- Go 1.25 or newer
+- A terminal that supports interactive input
+- Mouse support for the richer TUI experience
 
-**Usage:**
-
-```bash
-echo play "input.mp3"
-```
-
-### 2. Trim Audio (`trim`)
-
-The `trim` command lets users cut out a specific section from an audio file, such as extracting the chorus from 00:30 to 01:30.
-
-**Usage:**
+## Quick Start
 
 ```bash
-echo trim "input.mp3" --start 00:30 --end 01:30 --out "output.mp3"
+go run ./cmd/echo/main.go
 ```
 
-### 3. Concatenate Audio (`concat`)
-
-The `concat` command joins multiple audio files in order into one longer file.
-
-**Usage:**
+If you prefer a compiled binary:
 
 ```bash
-echo concat "file1.mp3" "file2.mp3" "file3.mp3" --out "output.mp3"
+make build
+./bin/echo
 ```
 
-### 4. Extract Audio from Video (`extract`)
+Note: `echo` is also a shell builtin on many systems, so running the binary path directly is usually the safest option.
 
-The `extract` command separates the audio track from a video file. This is especially useful when users want to save a good background song from a video.
-
-**Usage:**
+## Development
 
 ```bash
-echo extract "video.mp4" --out "output.mp3"
+make test
+make clean
 ```
 
-### 5. Adjust Volume (`volume`)
+`make test` runs the test suite under `tests/`.
 
-The `volume` command changes the playback level of an audio file. For example, a quiet voice recording can be boosted to twice the original volume.
+Local audio fixtures for manual checks live in `testdata/` and are ignored by git.
 
-**Usage:**
+## Project Layout
 
-```bash
-echo volume "file.mp3" --level 2.0 --out "output.mp3"
-```
+- `cmd/echo` - program entry point
+- `internal/cli` - command parsing and help output
+- `internal/tui` - interactive launcher
+- `internal/commands/play` - the current audio player
+- `internal/commands/{trim,concat,extract,volume}` - command shells for future work
+- `internal/audio` - backend wrappers for ffmpeg and ffprobe
+- `internal/utils` - shared validation helpers
 
-## Parameter Conventions
+## Status
 
-- `input`: the source file to process.
-- `--out`: the output file path.
-- `--start`: the start time for trimming.
-- `--end`: the end time for trimming.
-- `--level`: the volume multiplier.
-
-## Quick Examples
-
-```bash
-# Trim a segment from 00:30 to 01:30
-echo trim "input.mp3" --start 00:30 --end 01:30 --out "chorus.mp3"
-
-# Merge 3 audio files
-echo concat "intro.mp3" "main.mp3" "outro.mp3" --out "full_track.mp3"
-
-# Extract audio from a video
-echo extract "movie.mp4" --out "audio.mp3"
-
-# Increase volume by 2x
-echo volume "recording.mp3" --level 2.0 --out "louder.mp3"
-```
+This repository is ready for iterative development and GitHub hosting. The main UI and player are usable today, while the remaining command shells are in place for future implementation.
