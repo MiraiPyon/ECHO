@@ -21,6 +21,7 @@ ECHO is a terminal-based audio tool written in Go. It includes an interactive la
 - Go 1.25 or newer
 - A terminal that supports interactive input
 - Mouse support for the richer TUI experience
+- On Linux, `pkg-config` and `libasound2-dev` are required to build the audio backend
 
 ## Quick Start
 
