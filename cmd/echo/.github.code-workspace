@@ -1,0 +1,16 @@
+{
+	"folders": [
+		{
+			"path": "../../.github"
+		},
+		{
+			"path": "../../bin"
+		},
+		{
+			"path": ".."
+		},
+		{
+			"path": "../../internal"
+		}
+	]
+}

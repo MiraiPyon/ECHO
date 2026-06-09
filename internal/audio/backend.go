@@ -1,16 +1,42 @@
 package audio
 
-import "fmt"
+import (
+	"bytes"
+	"fmt"
+	"os/exec"
+)
 
 // RunFFmpeg wraps execution of the ffmpeg binary.
-func RunFFmpeg(args []string) error {
-	// TODO: Use os/exec to call `exec.Command("ffmpeg", args...)`.
-	// TODO: Capture stdout and stderr.
-	// TODO: Inspect the exit code and return a useful error on failure.
-	return fmt.Errorf("RunFFmpeg is not implemented yet")
+var RunFFmpeg = func(args []string) error {
+	_, err := exec.LookPath("ffmpeg")
+	if err != nil {
+		return fmt.Errorf("ffmpeg is not installed or not found in system PATH. Please install FFmpeg to run this command")
+	}
+
+	cmd := exec.Command("ffmpeg", args...)
+	var stderr bytes.Buffer
+	cmd.Stderr = &stderr
+
+	if err := cmd.Run(); err != nil {
+		return fmt.Errorf("ffmpeg execution failed: %w (stderr: %s)", err, stderr.String())
+	}
+	return nil
 }
 
-// RunFFprobe wraps execution of ffprobe when metadata is needed.
-func RunFFprobe(args []string) error {
-	return fmt.Errorf("RunFFprobe is not implemented yet")
+// RunFFprobe wraps execution of ffprobe when metadata is needed and returns its stdout.
+var RunFFprobe = func(args []string) ([]byte, error) {
+	_, err := exec.LookPath("ffprobe")
+	if err != nil {
+		return nil, fmt.Errorf("ffprobe is not installed or not found in system PATH. Please install FFmpeg to run this command")
+	}
+
+	cmd := exec.Command("ffprobe", args...)
+	var stdout, stderr bytes.Buffer
+	cmd.Stdout = &stdout
+	cmd.Stderr = &stderr
+
+	if err := cmd.Run(); err != nil {
+		return nil, fmt.Errorf("ffprobe execution failed: %w (stderr: %s)", err, stderr.String())
+	}
+	return stdout.Bytes(), nil
 }

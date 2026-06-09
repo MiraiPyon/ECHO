@@ -11,7 +11,6 @@ require (
 
 require (
 	github.com/gdamore/encoding v1.0.1 // indirect
-	github.com/gdamore/tcell v1.3.1-0.20200825151011-0c473b86d82f // indirect
 	github.com/hajimehoshi/go-mp3 v0.3.4 // indirect
 	github.com/hajimehoshi/oto v1.0.2 // indirect
 	github.com/lucasb-eyer/go-colorful v1.2.0 // indirect
